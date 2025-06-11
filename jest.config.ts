@@ -4,7 +4,12 @@ const config: Config = {
 	preset: 'ts-jest',
 	testEnvironment: 'jsdom',
 	verbose: true,
+
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+	testMatch: ['**/__tests__/**/*.test.ts?(x)', '**/?(*.)+(spec|test).ts?(x)'],
+	transform: {
+		'^.+\\.tsx?$': 'ts-jest',
+	},
 	collectCoverage: true,
 	coverageDirectory: 'coverage',
 	reporters: [
