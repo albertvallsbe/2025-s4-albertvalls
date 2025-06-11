@@ -13,17 +13,33 @@
             "rules": {
                 // "@typescript-eslint/no-unsafe-return": "off",
                 // "@typescript-eslint/no-unsafe-argument": "off",
+                "quotes": ["error", "double"],
                 "@typescript-eslint/no-unsafe-assignment": "off",
                 "@typescript-eslint/non-nullable-type-assertion-style": "off",
                 "@typescript-eslint/consistent-indexed-object-style": "off",
                 "no-negated-condition": "off",
                 "capitalized-comments": "off",
                 "no-else-return": "off",
+                "prefer-const": "off",
+                "@typescript-eslint/consistent-type-definitions": "off",
                 "@typescript-eslint/naming-convention": [
                     "error",
                     {
                         "selector": "default",
                         "format": ["strictCamelCase"]
+                    },
+                    {
+                        "selector": "typeLike",
+                        "format": ["PascalCase"]
+                    },
+                    {
+                        "selector": "variable",
+                        "modifiers": ["const"],
+                        "filter": {
+                            "regex": "^API_URL$",
+                            "match": true
+                        },
+                        "format": ["UPPER_CASE"]
                     },
                     {
                         "selector": "property",

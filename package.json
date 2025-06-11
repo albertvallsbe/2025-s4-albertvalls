@@ -2,6 +2,7 @@
     "name": "2025-s4-albertvalls",
     "version": "1.0.0",
     "description": "",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "test": "jest",
@@ -9,7 +10,8 @@
         "test-v-w": "jest --watchAll  --verbose --silent=false",
         "test-experimental": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "ts": "tsc",
-        "ts-w": "tsc --watch"
+        "ts-w": "tsc --watch",
+        "gen-config": "ts-node src/load-env.ts"
     },
     "devDependencies": {
         "@babel/core": "^7.24.5",
@@ -20,6 +22,7 @@
         "@typescript-eslint/parser": "^7.3.1",
         "axios": "^1.6",
         "babel-loader": "^9.1.3",
+        "dotenv": "^16.5.0",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-config-xo": "^0.44.0",
