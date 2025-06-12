@@ -1,0 +1,23 @@
+@use "sass:color";
+@use "./colors";
+
+html {
+	font-size: 16px;
+}
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: colors.$text-gray;
+	font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-weight: 600;
+}
+
+p {
+	margin-bottom: 1rem;
+}

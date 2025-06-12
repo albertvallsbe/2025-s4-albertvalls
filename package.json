@@ -11,7 +11,9 @@
         "test-experimental": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "ts": "tsc",
         "ts-w": "tsc --watch",
-        "gen-config": "ts-node src/load-env.ts"
+        "gen-config": "ts-node src/load-env.ts",
+        "sass": "sass ./src/styles/main.scss ./public/style.css",
+        "sass-w": "sass --watch ./src/styles/main.scss ./public/style.css"
     },
     "devDependencies": {
         "@babel/core": "^7.24.5",
@@ -34,6 +36,7 @@
         "jest-junit": "^14.0.1",
         "node-fetch": "^3.3.2",
         "prettier": "^3.3.0",
+        "sass": "^1.89.2",
         "ts-jest": "^29.3.4",
         "ts-loader": "^9.5.0",
         "ts-node": "^10.9.2",
