@@ -112,7 +112,7 @@ p {
   transition: background-color 0.2s ease-in-out;
 }
 .joke__next-button:hover {
-  background-color: rgb(0, 71.5217391304, 235);
+  background-color: #0048eb;
 }
 
 /*# sourceMappingURL=style.css.map */
