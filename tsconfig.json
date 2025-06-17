@@ -22,7 +22,9 @@
         // "noUnusedLocals": true,
         // "noUnusedParameters": true
     },
-    // "include": ["src/**/*.ts", "jest.config.ts", "tests/**/*.ts"],
+    "ts-node": {
+        "esm": true
+    },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
 }
