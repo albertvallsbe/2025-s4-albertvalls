@@ -2,9 +2,10 @@ import { type Joke } from "./types.js";
 import { renderJoke, renderError } from "./ui.js";
 import { randomJoke } from "./api.js";
 
-import { updateJokesArray } from "./joke.js";
+import { updateJokesArray, updateJokesArrayWithScore } from "./joke.js";
 
 const jokes: Joke[] = [];
+export let currentJokeId = "";
 
 export const startJoke = async (): Promise<void> => {
 	try {
@@ -39,8 +40,8 @@ export const onClickNewJoke = async (): Promise<void> => {
 		const newJoke: Joke = await randomJoke();
 
 		renderJoke(newJoke);
-
-		let newObject = updateJokesArray(jokes, newJoke);
+		currentJokeId = newJoke.id;
+		updateJokesArray(jokes, newJoke);
 	} catch (error) {
 		renderError("No s'ha pogut carregar l'acudit.");
 	}
@@ -52,7 +53,7 @@ export const onClickRating = async (event: Event): Promise<void> => {
 		const rateValue = newRate.getAttribute("data-value");
 
 		if (rateValue) {
-			console.log(`Puntuació de: ${rateValue}`);
+			updateJokesArrayWithScore(jokes, rateValue);
 		} else {
 			console.warn("No s'ha trobat cap valor de puntuació.");
 		}

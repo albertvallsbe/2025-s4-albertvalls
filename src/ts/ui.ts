@@ -4,8 +4,6 @@ export const renderJoke = (joke: Joke): void => {
 		const jokeTextElement = document.querySelector("#jokeText");
 		if (!jokeTextElement) throw new Error("Element Joke not found");
 		jokeTextElement.textContent = joke.joke;
-
-		console.log(joke.joke);
 	} catch (error) {
 		console.error("Error rendering joke:", error);
 	}

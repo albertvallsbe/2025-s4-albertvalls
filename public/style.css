@@ -60,8 +60,17 @@ p {
 }
 
 .joke__text {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   margin-bottom: 2rem;
+  max-height: 5em;
+  min-height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  hyphens: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .joke__rating {
@@ -112,7 +121,7 @@ p {
   transition: background-color 0.2s ease-in-out;
 }
 .joke__next-button:hover {
-  background-color: #0048eb;
+  background-color: rgb(0, 71.5217391304, 235);
 }
 
 /*# sourceMappingURL=style.css.map */
