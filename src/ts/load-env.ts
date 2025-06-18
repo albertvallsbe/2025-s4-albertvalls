@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const apiUrl = process.env.API_URL;
 if (!apiUrl) {
@@ -16,6 +21,6 @@ const configContent = `/**
 export const API_URL = "${apiUrl}";
 `;
 
-const outPath = path.resolve(__dirname, "../src/config.ts");
+const outPath = path.resolve(__dirname, "config.ts");
 fs.writeFileSync(outPath, configContent, { encoding: "utf8" });
 console.log(`✅  Configuració generada a ${outPath}`);

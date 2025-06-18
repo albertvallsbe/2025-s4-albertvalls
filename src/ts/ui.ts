@@ -1,8 +1,9 @@
-export const renderJoke = (jokeText: string, jokeId: string): void => {
+import { type Joke } from "./types.js";
+export const renderJoke = (joke: Joke): void => {
 	try {
 		const jokeTextElement = document.querySelector("#jokeText");
 		if (!jokeTextElement) throw new Error("Element Joke not found");
-		jokeTextElement.textContent = jokeText;
+		jokeTextElement.textContent = joke.joke;
 	} catch (error) {
 		console.error("Error rendering joke:", error);
 	}

@@ -1,5 +1,7 @@
 export type Joke = {
 	id: string;
 	joke: string;
-	status: number;
+	status: string;
+	score?: number;
+	date?: string;
 };

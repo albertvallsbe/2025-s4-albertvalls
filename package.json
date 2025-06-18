@@ -11,7 +11,7 @@
         "test-experimental": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "ts": "tsc",
         "ts-w": "tsc --watch",
-        "gen-config": "ts-node src/load-env.ts",
+        "gen-config": "node --loader ts-node/esm src/ts/load-env.ts",
         "sass": "sass ./src/styles/main.scss ./public/style.css",
         "sass-w": "sass --watch ./src/styles/main.scss ./public/style.css"
     },
