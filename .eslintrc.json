@@ -36,7 +36,7 @@
                         "selector": "variable",
                         "modifiers": ["const"],
                         "filter": {
-                            "regex": "^API_URL$",
+                            "regex": "^API_[A-Z]+$",
                             "match": true
                         },
                         "format": ["UPPER_CASE"]

@@ -1,6 +1,6 @@
 import { type Joke } from "./types.js";
 import { renderJoke, renderError } from "./ui.js";
-import { randomJoke } from "./api.js";
+import { randomJoke } from "./api-jokes.js";
 
 import { updateJokesArray, updateJokesArrayWithScore } from "./joke.js";
 
