@@ -1,4 +1,4 @@
-import { type Joke, type MunicipalityDates, AemetResponse } from "./types.js";
+import { type Joke, type MunicipalityToday, AemetResponse } from "./types.js";
 import { renderJoke, renderError } from "./jokes/jokeUi.js";
 import { renderMunicipalityDates } from "./meteo/meteoUi.js";
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_METEO, API_METEO_KEY } from "../config.js";
-import type { AemetResponse, AemetForecast } from "../types.js";
+import type { AemetResponse, AemetForecast, MunicipalityToday } from "../types.js";
 
 export const meteoByMunicipality = async (municipalityId: string): Promise<AemetForecast> => {
 	try {
