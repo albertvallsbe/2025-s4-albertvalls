@@ -1,4 +1,5 @@
-import { type Joke } from "./types.js";
+import { type Joke } from "../types.js";
+
 export const renderJoke = (joke: Joke): void => {
 	try {
 		const jokeTextElement = document.querySelector("#jokeText");

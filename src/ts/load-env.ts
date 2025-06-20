@@ -20,12 +20,19 @@ if (!apiUrlMeteo) {
 	process.exit(1);
 }
 
+const apiUrlMeteoKey = process.env.API_METEO_KEY;
+if (!apiUrlMeteoKey) {
+	console.error("⚠️  ERROR: .env no conté API_METEO_KEY");
+	process.exit(1);
+}
+
 const configContent = `/**
  * Aquest fitxer és generat per scripts/load-env.ts
  * No l'editis a mà, torna'l a generar després de canviar .env
  */
 export const API_JOKES = "${apiUrlJokes}";
 export const API_METEO = "${apiUrlMeteo}";
+export const API_METEO_KEY = "${apiUrlMeteoKey}";
 `;
 
 const outPath = path.resolve(__dirname, "config.ts");

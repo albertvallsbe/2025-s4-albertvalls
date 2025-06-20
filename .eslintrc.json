@@ -36,14 +36,17 @@
                         "selector": "variable",
                         "modifiers": ["const"],
                         "filter": {
-                            "regex": "^API_[A-Z]+$",
+                            "regex": "^API_[A-Z]+(?:_[A-Z]+)?$",
                             "match": true
                         },
                         "format": ["UPPER_CASE"]
                     },
                     {
                         "selector": "property",
-                        "modifiers": ["requiresQuotes"],
+                        "filter": {
+                            "regex": "^api_key$",
+                            "match": true
+                        },
                         "format": null
                     }
                 ]

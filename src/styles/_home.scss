@@ -1,10 +1,46 @@
 @use "sass:color";
 @use "./colors";
 
+.navbar {
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: center;
+	padding: 0.5rem 2rem;
+	background-color: colors.$white;
+	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+	margin-bottom: 1rem;
+	width: 100%;
+	box-sizing: border-box;
+
+	@media screen and (min-width: 600px) {
+		grid-template-columns: auto 1fr;
+	}
+}
+
+.navbar__left {
+	display: grid;
+	grid-auto-flow: column;
+	align-items: center;
+	gap: 2rem;
+	justify-content: start;
+}
+
+.navbar__location {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: colors.$primary-color;
+}
+
+.navbar__temp {
+	font-size: 1.2rem;
+	color: color.scale(colors.$primary-color, $lightness: -20%);
+	font-weight: 500;
+}
+
 .joke {
 	display: grid;
 	place-items: start center;
-	padding: 6rem 2rem 2rem;
+	padding: 2rem;
 	background: colors.$light-gray;
 	min-height: 100vh;
 	overflow-y: auto;

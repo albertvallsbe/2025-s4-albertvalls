@@ -1,11 +1,16 @@
-import { type Joke } from "./types.js";
-import { renderJoke, renderError } from "./ui.js";
-import { randomJoke } from "./api-jokes.js";
+import { type Joke, type MunicipalityDates, AemetResponse } from "./types.js";
+import { renderJoke, renderError } from "./jokes/jokeUi.js";
+import { renderMunicipalityDates } from "./meteo/meteoUi.js";
 
-import { updateJokesArray, updateJokesArrayWithScore } from "./joke.js";
+import { randomJoke } from "./jokes/api-jokes.js";
+import { meteoByMunicipality } from "./meteo/api-meteo.js";
+
+import { updateJokesArray, updateJokesArrayWithScore } from "./jokes/joke.js";
+import { filterMeteoByMunicipality } from "./meteo/meteo.js";
 
 const jokes: Joke[] = [];
 export let currentJokeId = "";
+export let municipalityId = "08279";
 
 export const startJoke = async (): Promise<void> => {
 	try {
@@ -33,6 +38,12 @@ export const startRating = async (): Promise<void> => {
 	} catch (error) {
 		console.error("Error setting next button listener:", error);
 	}
+};
+
+export const meteoCalls = async (): Promise<void> => {
+	let meteoResponse = await meteoByMunicipality("08279");
+	let filterMeteoResponse = await filterMeteoByMunicipality(meteoResponse);
+	renderMunicipalityDates(filterMeteoResponse);
 };
 
 export const onClickNewJoke = async (): Promise<void> => {
@@ -66,4 +77,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	void startJoke();
 	void startRating();
 	void onClickNewJoke();
+	void meteoCalls();
 });

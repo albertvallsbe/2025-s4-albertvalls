@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_METEO } from "./config.js";
-import { type Joke } from "./types.js";
+import { API_JOKES } from "../config.js";
+import { type Joke } from "../types.js";
 
 export const randomJoke = async (): Promise<Joke> => {
 	try {
-		const response = await axios.get<Joke>(API_METEO, {
+		const response = await axios.get<Joke>(API_JOKES, {
 			headers: { accept: "application/json" },
 		});
 		return response.data;

@@ -4,5 +4,6 @@
 	"trailingComma": "all",
 	"printWidth": 100,
 	"tabWidth": 4,
-	"arrowParens": "always"
+	"arrowParens": "always",
+	"quoteProps": "preserve"
 }
