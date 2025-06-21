@@ -11,7 +11,10 @@
         "strict": true,
         "skipLibCheck": true,
         "experimentalDecorators": true,
-        "types": ["jest", "node"]
+        "types": ["jest", "node"],
+
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true
 
         // "noImplicitAny": true,
         // "strictNullChecks": true,

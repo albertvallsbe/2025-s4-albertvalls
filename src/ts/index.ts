@@ -1,11 +1,20 @@
-import { type Joke } from "./types.js";
-import { renderJoke, renderError } from "./ui.js";
-import { randomJoke } from "./api.js";
+import { type Joke, type MunicipalityToday, AemetResponse, type Coords } from "./types.js";
+import { renderJoke, renderError } from "./jokes/jokeUi.js";
+import { renderMunicipalityDates } from "./meteo/meteoUi.js";
+import { getUbicationAndMunicipi, getCodiMunicipiByName } from "./ubication.js";
 
-import { updateJokesArray, updateJokesArrayWithScore } from "./joke.js";
+import { randomJoke } from "./jokes/api-jokes.js";
+import { meteoByMunicipality } from "./meteo/api-meteo.js";
+
+import { updateJokesArray, updateJokesArrayWithScore } from "./jokes/joke.js";
+import { filterMeteoByMunicipality } from "./meteo/meteo.js";
 
 const jokes: Joke[] = [];
 export let currentJokeId = "";
+export let municipalityId = "Terrassa";
+let municipiReal = "";
+
+export let theoreticalHour = "22:01";
 
 export const startJoke = async (): Promise<void> => {
 	try {
@@ -35,6 +44,23 @@ export const startRating = async (): Promise<void> => {
 	}
 };
 
+export const meteoCalls = async (): Promise<void> => {
+	let municipiReal = await getUbicationAndMunicipi();
+	// console.log("municipiReal", municipiReal);
+
+	let idToUse = municipiReal !== "" ? municipiReal : municipalityId;
+	// idToUse = "Xàtiva";
+	// console.log("municipalityId", municipalityId);
+	let aemetCode = await getCodiMunicipiByName(idToUse);
+
+	// console.log("aemetCode", aemetCode);
+	let meteoResponse = await meteoByMunicipality(aemetCode);
+	// console.log("meteoResponse", meteoResponse);
+
+	let filterMeteoResponse = await filterMeteoByMunicipality(meteoResponse);
+	renderMunicipalityDates(filterMeteoResponse);
+};
+
 export const onClickNewJoke = async (): Promise<void> => {
 	try {
 		const newJoke: Joke = await randomJoke();
@@ -62,8 +88,9 @@ export const onClickRating = async (event: Event): Promise<void> => {
 	}
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 	void startJoke();
 	void startRating();
 	void onClickNewJoke();
+	void meteoCalls();
 });
