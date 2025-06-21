@@ -62,3 +62,13 @@ export type MunicipalityToday = {
 		value: number;
 	}>;
 };
+
+export type Coords = {
+	latitude: number;
+	longitude: number;
+};
+
+export type Municipi = {
+	codi: string;
+	nom: string;
+};

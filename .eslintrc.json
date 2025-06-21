@@ -22,34 +22,35 @@
                 "no-else-return": "off",
                 "prefer-const": "off",
                 "@typescript-eslint/consistent-type-definitions": "off",
-                "@typescript-eslint/naming-convention": [
-                    "error",
-                    {
-                        "selector": "default",
-                        "format": ["strictCamelCase"]
-                    },
-                    {
-                        "selector": "typeLike",
-                        "format": ["PascalCase"]
-                    },
-                    {
-                        "selector": "variable",
-                        "modifiers": ["const"],
-                        "filter": {
-                            "regex": "^API_[A-Z]+(?:_[A-Z]+)?$",
-                            "match": true
-                        },
-                        "format": ["UPPER_CASE"]
-                    },
-                    {
-                        "selector": "property",
-                        "filter": {
-                            "regex": "^api_key$",
-                            "match": true
-                        },
-                        "format": null
-                    }
-                ]
+                "@typescript-eslint/naming-convention": "off"
+                // "@typescript-eslint/naming-convention": [
+                //     "error",
+                //     {
+                //         "selector": "default",
+                //         "format": ["strictCamelCase"]
+                //     },
+                //     {
+                //         "selector": "typeLike",
+                //         "format": ["PascalCase"]
+                //     },
+                //     {
+                //         "selector": "variable",
+                //         "modifiers": ["const"],
+                //         "filter": {
+                //             "regex": "^API_[A-Z]+(?:_[A-Z]+)?$",
+                //             "match": true
+                //         },
+                //         "format": ["UPPER_CASE"]
+                //     },
+                //     {
+                //         "selector": "property",
+                //         "filter": {
+                //             "regex": "^api_key$",
+                //             "match": true
+                //         },
+                //         "format": null
+                //     }
+                // ]
             }
         }
     ],

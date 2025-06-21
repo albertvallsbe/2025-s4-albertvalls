@@ -20,7 +20,7 @@ export const meteoByMunicipality = async (municipalityId: string): Promise<Aemet
 
 		const forecastResponse = await axios.get<AemetForecast>(datos);
 
-		console.log("📦 Dades meteorològiques rebudes:", forecastResponse.data);
+		// console.log("📦 Dades meteorològiques rebudes:", forecastResponse.data);
 
 		return forecastResponse.data;
 	} catch (error) {

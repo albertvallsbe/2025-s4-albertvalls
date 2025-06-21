@@ -72,9 +72,9 @@ export const filterMeteoByMunicipality = async (
 		minima,
 		temperatura,
 	};
-	console.log(
-		"filter → municipalityTodayDates:",
-		JSON.stringify(municipalityTodayDates, null, 2),
-	);
+	// console.log(
+	// 	"filter → municipalityTodayDates:",
+	// 	JSON.stringify(municipalityTodayDates, null, 2),
+	// );
 	return municipalityTodayDates;
 };
