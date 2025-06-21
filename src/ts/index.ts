@@ -11,6 +11,8 @@ import { filterMeteoByMunicipality } from "./meteo/meteo.js";
 const jokes: Joke[] = [];
 export let currentJokeId = "";
 export let municipalityId = "08279";
+// export let theoreticalHour = "22:01";
+export let theoreticalHour = "22:01";
 
 export const startJoke = async (): Promise<void> => {
 	try {
@@ -41,7 +43,7 @@ export const startRating = async (): Promise<void> => {
 };
 
 export const meteoCalls = async (): Promise<void> => {
-	let meteoResponse = await meteoByMunicipality("08279");
+	let meteoResponse = await meteoByMunicipality(municipalityId);
 	let filterMeteoResponse = await filterMeteoByMunicipality(meteoResponse);
 	renderMunicipalityDates(filterMeteoResponse);
 };

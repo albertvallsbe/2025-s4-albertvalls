@@ -1,5 +1,42 @@
 import { type AemetForecast, type AemetResponse, type MunicipalityToday } from "../types.js";
-import { municipalityId } from "../index.js";
+import { theoreticalHour } from "../index.js";
+
+export function getNearestDatoValue(dato: Array<{ hora: number; value: number }>): number {
+	if (dato.length === 0) {
+		throw new Error("L'array de dades està buit");
+	}
+
+	const [hStr, mStr] = theoreticalHour.split(":");
+	const h = Number(hStr);
+	const m = Number(mStr);
+	if (Number.isNaN(h) || Number.isNaN(m) || h < 0 || h >= 24 || m < 0 || m >= 60) {
+		throw new Error(`Format d'hora invàlid: ${theoreticalHour}`);
+	}
+
+	const theoricHours = h + m / 60;
+
+	let best = {
+		diff: Infinity,
+		value: Number(dato[0].value),
+	};
+
+	for (const entry of dato) {
+		const rawHour = entry.hora % 24;
+		const entryHour = rawHour < 0 ? rawHour + 24 : rawHour;
+
+		const entryValue = entry.value;
+
+		const directDiff = Math.abs(entryHour - theoricHours);
+		const circularDiff = 24 - directDiff;
+		const diff = Math.min(directDiff, circularDiff);
+
+		if (diff < best.diff) {
+			best = { diff, value: entryValue };
+		}
+	}
+
+	return best.value;
+}
 
 export const filterMeteoByMunicipality = async (
 	meteoResponse: AemetForecast,
@@ -24,7 +61,8 @@ export const filterMeteoByMunicipality = async (
 		value: entry.value,
 	}));
 
-	const temperatura = `Min: ${minima}°C / Max: ${maxima}°C`;
+	const nearest = getNearestDatoValue(dato);
+	const temperatura = `Actual: ${nearest}°C - Min: ${minima}°C / Max: ${maxima}°C`;
 
 	let municipalityTodayDates: MunicipalityToday = {
 		nombre: forecast.nombre,

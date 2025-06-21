@@ -1,11 +1,10 @@
 import axios from "axios";
 import { API_METEO, API_METEO_KEY } from "../config.js";
-import type { AemetResponse, AemetForecast, MunicipalityToday } from "../types.js";
+import type { AemetResponse, AemetForecast } from "../types.js";
 
 export const meteoByMunicipality = async (municipalityId: string): Promise<AemetForecast> => {
 	try {
-		// URL construïda a partir de la base i el codi del municipi
-		const url = `${API_METEO}${municipalityId}`;
+		let url = `${API_METEO}${municipalityId}`;
 
 		const initialResponse = await axios.get<AemetResponse>(url, {
 			params: {
