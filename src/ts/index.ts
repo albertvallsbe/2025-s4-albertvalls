@@ -1,7 +1,15 @@
-import { type Joke, type MunicipalityToday, AemetResponse, type Coords } from "./types.js";
+import axios from "axios";
+// import { municipalities } from "./municipalities.js";
+import {
+	type Joke,
+	type MunicipalityToday,
+	AemetResponse,
+	type Coords,
+	type Municipi,
+} from "./types.js";
 import { renderJoke, renderError } from "./jokes/jokeUi.js";
 import { renderMunicipalityDates } from "./meteo/meteoUi.js";
-import { getUbicationAndMunicipi, getCodiMunicipiByName } from "./ubication.js";
+import { getCurrentMunicipality, getCodiMunicipiByName } from "./ubication.js";
 
 import { randomJoke } from "./jokes/api-jokes.js";
 import { meteoByMunicipality } from "./meteo/api-meteo.js";
@@ -13,8 +21,37 @@ const jokes: Joke[] = [];
 export let currentJokeId = "";
 export let municipalityId = "Terrassa";
 let municipiReal = "";
+let municipalities: Municipi[] = [];
 
 export let theoreticalHour = "22:01";
+
+export const meteoCalls = async (): Promise<void> => {
+	try {
+		municipiReal = await getCurrentMunicipality();
+
+		// console.log("municipiReal", municipiReal);
+		// console.log("municipalityId", municipalityId);
+		let idToUse = municipiReal !== "" ? municipiReal : municipalityId;
+
+		// Use json to import municipalities list
+		// *
+		municipalities = await getMunicipalitiesList();
+		// *
+
+		// idToUse = "Xàtiva";
+		let aemetCode = await getCodiMunicipiByName(municipalities, idToUse);
+
+		// console.log("aemetCode", aemetCode);
+		let meteoResponse = await meteoByMunicipality(aemetCode);
+
+		// console.log("meteoResponse", meteoResponse);
+		let filterMeteoResponse = await filterMeteoByMunicipality(meteoResponse);
+
+		renderMunicipalityDates(filterMeteoResponse);
+	} catch (error) {
+		console.error("Error calling meteo API:", error);
+	}
+};
 
 export const startJoke = async (): Promise<void> => {
 	try {
@@ -44,23 +81,6 @@ export const startRating = async (): Promise<void> => {
 	}
 };
 
-export const meteoCalls = async (): Promise<void> => {
-	let municipiReal = await getUbicationAndMunicipi();
-	// console.log("municipiReal", municipiReal);
-
-	let idToUse = municipiReal !== "" ? municipiReal : municipalityId;
-	// idToUse = "Xàtiva";
-	// console.log("municipalityId", municipalityId);
-	let aemetCode = await getCodiMunicipiByName(idToUse);
-
-	// console.log("aemetCode", aemetCode);
-	let meteoResponse = await meteoByMunicipality(aemetCode);
-	// console.log("meteoResponse", meteoResponse);
-
-	let filterMeteoResponse = await filterMeteoByMunicipality(meteoResponse);
-	renderMunicipalityDates(filterMeteoResponse);
-};
-
 export const onClickNewJoke = async (): Promise<void> => {
 	try {
 		const newJoke: Joke = await randomJoke();
@@ -88,9 +108,37 @@ export const onClickRating = async (event: Event): Promise<void> => {
 	}
 };
 
+// Treballant amb un json
+// export const getMunicipalitiesList = async (): Promise<Municipi[]> => {
+// 	const response = await fetch("./src/municipis.json");
+
+// 	if (!response.ok) {
+// 		throw new Error(`Error loading municipalities.json: ${response.status}`);
+// 	}
+
+// 	const data = (await response.json()) as Municipi[];
+
+// 	if (!Array.isArray(data)) {
+// 		throw new Error("Invalid format: expected an array of municipalities");
+// 	}
+
+// 	return data;
+// };
+
+// Treballant amb json i axios
+export const getMunicipalitiesList = async (): Promise<Municipi[]> => {
+	const municipalitiesList = await axios.get<Municipi[]>("./src/municipis.json", {
+		headers: { "Accept": "application/json" },
+	});
+
+	let municipalities = municipalitiesList.data;
+
+	return municipalities;
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
+	void meteoCalls();
 	void startJoke();
 	void startRating();
 	void onClickNewJoke();
-	void meteoCalls();
 });

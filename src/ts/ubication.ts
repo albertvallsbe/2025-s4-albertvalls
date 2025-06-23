@@ -1,7 +1,7 @@
 import axios from "axios";
 import { type Coords, type Municipi } from "./types.js";
 
-export const obtenirPosicioGps = async (): Promise<Coords> => {
+export const getGpsPosition = async (): Promise<Coords> => {
 	if (!("geolocation" in navigator)) {
 		throw new Error("Geolocalització no disponible");
 	}
@@ -50,7 +50,7 @@ export const obtenirPosicioGps = async (): Promise<Coords> => {
 	}
 };
 
-export const obtenirMunicipiPerCoords = async (coords: Coords): Promise<string> => {
+export const getMunicipalityByCoordinates = async (coords: Coords): Promise<string> => {
 	const { latitude, longitude } = coords;
 
 	try {
@@ -85,12 +85,12 @@ export const obtenirMunicipiPerCoords = async (coords: Coords): Promise<string> 
 	}
 };
 
-export const getUbicationAndMunicipi = async (): Promise<string> => {
+export const getCurrentMunicipality = async (): Promise<string> => {
 	try {
-		let coords = await obtenirPosicioGps();
+		let coords = await getGpsPosition();
 
 		// coords = { latitude: 41.93333, longitude: 2.06667 };
-		const municipi = await obtenirMunicipiPerCoords(coords);
+		const municipi = await getMunicipalityByCoordinates(coords);
 
 		return municipi;
 	} catch (error) {
@@ -100,17 +100,33 @@ export const getUbicationAndMunicipi = async (): Promise<string> => {
 	}
 };
 
-export const getCodiMunicipiByName = async (nomMunicipi: string): Promise<string> => {
-	const response = await axios.get<Municipi[]>("./src/municipis.json", {
-		headers: { "Accept": "application/json" },
-	});
-	const municipis = response.data;
+export const getCodiMunicipiByName = async (
+	municipalities: Municipi[],
+	nomMunicipi: string,
+): Promise<string> => {
+	try {
+		if (!nomMunicipi) {
+			throw new Error("Municipi no rebut");
+		}
 
-	const municipiFound = municipis.find((item) => item.nom === nomMunicipi);
+		if (!Array.isArray(municipalities) || municipalities.length === 0) {
+			throw new Error("Municipis no rebuts");
+		}
 
-	if (!municipiFound) {
-		throw new Error(`Municipi "${nomMunicipi}" no trobat al llistat`);
+		// console.log(municipalities);
+
+		const foundMunicipality = municipalities.find((item) => item.nom === nomMunicipi);
+
+		if (!foundMunicipality) {
+			throw new Error(`Municipi "${nomMunicipi}" no trobat al llistat`);
+		}
+
+		return foundMunicipality.codi;
+	} catch (error) {
+		console.error(
+			`Error obtenint codi del municipi "${nomMunicipi}":`,
+			(error as Error).message,
+		);
+		throw error;
 	}
-
-	return municipiFound.codi;
 };
