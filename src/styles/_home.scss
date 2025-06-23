@@ -8,9 +8,10 @@
 	padding: 0.5rem 2rem;
 	background-color: colors.$white;
 	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-	margin-bottom: 1rem;
+	// margin-bottom: 1rem;
 	width: 100%;
 	box-sizing: border-box;
+	min-height: 50px;
 
 	@media screen and (min-width: 600px) {
 		grid-template-columns: auto 1fr;
