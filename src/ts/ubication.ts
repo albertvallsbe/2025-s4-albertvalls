@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_STREETMAP } from "./config.js";
 import { type Coords, type Municipi } from "./types.js";
 
 export const getGpsPosition = async (): Promise<Coords> => {
@@ -54,7 +55,8 @@ export const getMunicipalityByCoordinates = async (coords: Coords): Promise<stri
 	const { latitude, longitude } = coords;
 
 	try {
-		const response = await axios.get("https://nominatim.openstreetmap.org/reverse", {
+		let urlOpenStreetMap = `${API_STREETMAP}`;
+		const response = await axios.get(urlOpenStreetMap, {
 			params: {
 				format: "json",
 				lat: latitude,
