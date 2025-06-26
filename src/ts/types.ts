@@ -29,7 +29,6 @@ export type AemetForecastDay = {
 	uvMax?: number;
 	viento?: Record<string, unknown>;
 	cotaNieveProv?: Record<string, unknown>;
-	// **Ara temperatura és un objecte, no un array**
 	temperatura: {
 		maxima: number;
 		minima: number;

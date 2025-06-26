@@ -108,23 +108,6 @@ export const onClickRating = async (event: Event): Promise<void> => {
 	}
 };
 
-// Treballant amb un json
-// export const getMunicipalitiesList = async (): Promise<Municipi[]> => {
-// 	const response = await fetch("./src/municipis.json");
-
-// 	if (!response.ok) {
-// 		throw new Error(`Error loading municipalities.json: ${response.status}`);
-// 	}
-
-// 	const data = (await response.json()) as Municipi[];
-
-// 	if (!Array.isArray(data)) {
-// 		throw new Error("Invalid format: expected an array of municipalities");
-// 	}
-
-// 	return data;
-// };
-
 // Treballant amb json i axios
 export const getMunicipalitiesList = async (): Promise<Municipi[]> => {
 	const municipalitiesList = await axios.get<Municipi[]>("./src/municipis.json", {

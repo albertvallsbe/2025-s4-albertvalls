@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
@@ -26,6 +25,12 @@ if (!apiUrlMeteoKey) {
 	process.exit(1);
 }
 
+const apiStreetmap = process.env.API_STREETMAP;
+if (!apiStreetmap) {
+	console.error("⚠️  ERROR: .env no conté API_STREETMAP");
+	process.exit(1);
+}
+
 const configContent = `/**
  * Aquest fitxer és generat per scripts/load-env.ts
  * No l'editis a mà, torna'l a generar després de canviar .env
@@ -33,6 +38,7 @@ const configContent = `/**
 export const API_JOKES = "${apiUrlJokes}";
 export const API_METEO = "${apiUrlMeteo}";
 export const API_METEO_KEY = "${apiUrlMeteoKey}";
+export const API_STREETMAP = "${apiStreetmap}";
 `;
 
 const outPath = path.resolve(__dirname, "config.ts");
