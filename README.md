@@ -73,11 +73,11 @@ Check out the live demo to see the application in action.
 
 **CAT:**
 
-_Segueix aquests passos per clonar el projecte i fer servir el compilador TypeScript en mode “watch” i executa els test amb Jest._
+_Segueix aquests passos per clonar el projecte i fer servir el compilador TypeScript en mode “watch” i executa els estils amb SASS també en mode "watch"._
 
 **EN:**
 
-_Follow these steps to clone the project and run the TypeScript compiler in watch mode and run the test with Jest._
+Follow these steps to clone the project, use the TypeScript compiler in “watch” mode, and run the styles with SASS also in “watch” mode.\_
 
 **Requeriments / Prerequisites**
 
